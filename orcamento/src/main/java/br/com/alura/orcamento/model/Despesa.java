@@ -23,11 +23,17 @@ public class Despesa {
     private String descricao;
     private BigDecimal valor;
     private LocalDate data;
+    @Enumerated(EnumType.STRING)
+    private Categoria categoria;
 
     public Despesa(DadosCadastroDespesa dados) {
         this.descricao = dados.descricao();
         this.valor = dados.valor();
         this.data = dados.data();
+        if (dados.categoria() != null)
+            this.categoria = dados.categoria();
+        else
+            this.categoria = Categoria.OUTRAS;
     }
 
     public void atualizar(DadosAtualizacaoDespesa dados) {
@@ -37,5 +43,7 @@ public class Despesa {
             this.valor = dados.valor();
         if (dados.data() != null)
             this.data = dados.data();
+        if (dados.categoria() != null)
+            this.categoria = dados.categoria();
     }
 }

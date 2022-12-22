@@ -1,5 +1,6 @@
 package br.com.alura.orcamento.dto.despesa;
 
+import br.com.alura.orcamento.model.Categoria;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -20,6 +21,7 @@ public record DadosCadastroDespesa(
         @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
         @JsonDeserialize(using = LocalDateDeserializer.class)
         @JsonSerialize(using = LocalDateSerializer.class)
-        LocalDate data
+        LocalDate data,
+        Categoria categoria
 ) {
 }
