@@ -1,5 +1,6 @@
 package br.com.alura.orcamento.controller;
 
+import br.com.alura.orcamento.dto.receita.DadosAtualizacaoReceita;
 import br.com.alura.orcamento.dto.receita.DadosCadastroReceita;
 import br.com.alura.orcamento.dto.receita.DadosDetalhamentoReceita;
 import br.com.alura.orcamento.dto.receita.DadosListagemReceita;
@@ -51,6 +52,22 @@ public class ReceitaController {
             throw new RuntimeException("Receita não encontrada");
         Receita receita = opcional.get();
         return ResponseEntity.ok(new DadosDetalhamentoReceita(receita));
+    }
+
+    @PutMapping("{id}")
+    @Transactional
+    public ResponseEntity<DadosDetalhamentoReceita> atualizar(@RequestBody @Valid DadosAtualizacaoReceita dados, @PathVariable Long id) {
+        ValidarReceitaIgual.validarAtualizacao(id, dados, repository);
+        Receita receita = repository.getReferenceById(id);
+        receita.atualizarInformacoes(dados);
+        return ResponseEntity.ok(new DadosDetalhamentoReceita(receita));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity remover(@PathVariable Long id) {
+        repository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
