@@ -71,4 +71,10 @@ public class ReceitaController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{ano}/{mes}")
+    public ResponseEntity<Page<DadosListagemReceita>> listar(@PageableDefault(size = 10, sort = "data") Pageable paginacao,
+                                                             @PathVariable String ano, @PathVariable String mes) {
+        return ResponseEntity.ok(repository.findByAnoeMes(ano, mes, paginacao).map(DadosListagemReceita::new));
+    }
+
 }

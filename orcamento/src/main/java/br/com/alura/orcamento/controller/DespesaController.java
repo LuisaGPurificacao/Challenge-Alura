@@ -7,6 +7,7 @@ import br.com.alura.orcamento.infra.validation.ValidarDespesaIgual;
 import br.com.alura.orcamento.model.Despesa;
 import br.com.alura.orcamento.repository.DespesaRepository;
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -68,6 +69,12 @@ public class DespesaController {
     public ResponseEntity remover(@PathVariable Long id) {
         repository.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{ano}/{mes}")
+    public ResponseEntity<Page<DadosListagemDespesa>> listar(@PageableDefault(size = 10, sort = "data") Pageable paginacao,
+                                                             @PathVariable String ano, @PathVariable String mes) {
+        return ResponseEntity.ok(repository.findByAnoeMes(ano, mes, paginacao).map(DadosListagemDespesa::new));
     }
 
 }
