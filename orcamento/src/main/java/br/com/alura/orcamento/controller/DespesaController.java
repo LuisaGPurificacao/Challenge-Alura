@@ -39,10 +39,10 @@ public class DespesaController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DadosListagemDespesa>> listar(@PageableDefault(size = 10, sort = "data")
-                                                             Pageable paginacao) {
-        Page<DadosListagemDespesa> despesas = repository.findAll(paginacao).map(DadosListagemDespesa::new);
-        return ResponseEntity.ok(despesas);
+    public ResponseEntity<Page<DadosListagemDespesa>> listar(@PageableDefault(size = 10, sort = "data") Pageable paginacao,
+                                                             @RequestParam(name = "descricao", required = false) String descricao) {
+        return descricao == null ? ResponseEntity.ok(repository.findAll(paginacao).map(DadosListagemDespesa::new))
+                : ResponseEntity.ok(repository.findByDescricaoContains(descricao, paginacao).map(DadosListagemDespesa::new));
     }
 
     @GetMapping("/{id}")
