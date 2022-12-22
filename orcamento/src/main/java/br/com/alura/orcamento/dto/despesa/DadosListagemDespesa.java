@@ -7,11 +7,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public record DadosDetalhamentoDespesa(String descricao, BigDecimal valor,
-                                       @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
-                                       LocalDate data) {
+public record DadosListagemDespesa(String descricao, BigDecimal valor,
+                                   @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
+                                   LocalDate data) {
 
-    public DadosDetalhamentoDespesa(Despesa despesa) {
+    public DadosListagemDespesa(Despesa despesa) {
         this(despesa.getDescricao(), despesa.getValor(), despesa.getData());
     }
 
