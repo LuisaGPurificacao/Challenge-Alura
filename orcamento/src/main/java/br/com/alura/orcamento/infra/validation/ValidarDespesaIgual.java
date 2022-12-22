@@ -1,6 +1,7 @@
 package br.com.alura.orcamento.infra.validation;
 
 import br.com.alura.orcamento.dto.despesa.DadosCadastroDespesa;
+import br.com.alura.orcamento.dto.despesa.DadosAtualizacaoDespesa;
 import br.com.alura.orcamento.model.Despesa;
 import br.com.alura.orcamento.repository.DespesaRepository;
 
@@ -19,19 +20,17 @@ public class ValidarDespesaIgual {
         }
     }
 
-    /**
-     public static void validarAtualizacao(Long id, DadosAtualizacaoDespesa dados, DespesaRepository repository) {
-     if (dados.descricao() == "" || dados.descricao() == null)
-     return;
-     Despesa despesa = repository.getReferenceById(id);
-     List<Despesa> receitasDescricaoIguais = repository.findByDescricao(dados.descricao());
-     for (Despesa d : despesasDescricaoIguais) {
-     Month month = d.getData().getMonth();
-     Month month2 = despesa.getData().getMonth();
-     if (month == month2)
-     throw new RuntimeException("Não pode ter uma despesa com a mesma descrição no mesmo mês.");
-     }
-     }
-     **/
+    public static void validarAtualizacao(Long id, DadosAtualizacaoDespesa dados, DespesaRepository repository) {
+        if (dados.descricao() == "" || dados.descricao() == null)
+            return;
+        Despesa despesa = repository.getReferenceById(id);
+        List<Despesa> despesasDescricaoIguais = repository.findByDescricao(dados.descricao());
+        for (Despesa d : despesasDescricaoIguais) {
+            Month month = d.getData().getMonth();
+            Month month2 = despesa.getData().getMonth();
+            if (month == month2)
+                throw new RuntimeException("Não pode ter uma despesa com a mesma descrição no mesmo mês.");
+        }
+    }
 
 }

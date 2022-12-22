@@ -1,5 +1,6 @@
 package br.com.alura.orcamento.controller;
 
+import br.com.alura.orcamento.dto.despesa.DadosAtualizacaoDespesa;
 import br.com.alura.orcamento.dto.despesa.DadosCadastroDespesa;
 import br.com.alura.orcamento.dto.despesa.DadosListagemDespesa;
 import br.com.alura.orcamento.infra.validation.ValidarDespesaIgual;
@@ -51,6 +52,22 @@ public class DespesaController {
             throw new RuntimeException("Despesa não encontrada");
         Despesa despesa = opcional.get();
         return ResponseEntity.ok(new DadosListagemDespesa(despesa));
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<DadosListagemDespesa> atualizar(@PathVariable Long id, @RequestBody @Valid DadosAtualizacaoDespesa dados) {
+        ValidarDespesaIgual.validarAtualizacao(id, dados, repository);
+        Despesa despesa = repository.getReferenceById(id);
+        despesa.atualizar(dados);
+        return ResponseEntity.ok(new DadosListagemDespesa(despesa));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity remover(@PathVariable Long id) {
+        repository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
