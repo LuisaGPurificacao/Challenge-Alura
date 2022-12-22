@@ -1,5 +1,6 @@
 package br.com.alura.orcamento.model;
 
+import br.com.alura.orcamento.dto.despesa.DadosCadastroDespesa;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,4 +23,9 @@ public class Despesa {
     private BigDecimal valor;
     private LocalDate data;
 
+    public Despesa(DadosCadastroDespesa dados) {
+        this.descricao = dados.descricao();
+        this.valor = dados.valor();
+        this.data = dados.data();
+    }
 }
