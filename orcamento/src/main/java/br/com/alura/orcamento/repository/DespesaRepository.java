@@ -1,6 +1,6 @@
 package br.com.alura.orcamento.repository;
 
-import br.com.alura.orcamento.dto.DadosValorPorCategoriaInterface;
+import br.com.alura.orcamento.dto.resumo.DadosValorPorCategoriaInterface;
 import br.com.alura.orcamento.model.Despesa;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

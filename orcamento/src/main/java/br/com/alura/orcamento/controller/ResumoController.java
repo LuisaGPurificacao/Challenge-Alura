@@ -1,8 +1,8 @@
 package br.com.alura.orcamento.controller;
 
-import br.com.alura.orcamento.dto.DadosResumoMes;
-import br.com.alura.orcamento.dto.DadosValorPorCategoriaInterface;
-import br.com.alura.orcamento.dto.ResumoMes;
+import br.com.alura.orcamento.dto.resumo.DadosResumoMes;
+import br.com.alura.orcamento.dto.resumo.DadosValorPorCategoriaInterface;
+import br.com.alura.orcamento.dto.resumo.ResumoMes;
 import br.com.alura.orcamento.repository.DespesaRepository;
 import br.com.alura.orcamento.repository.ReceitaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

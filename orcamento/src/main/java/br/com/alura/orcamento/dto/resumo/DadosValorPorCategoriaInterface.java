@@ -1,4 +1,4 @@
-package br.com.alura.orcamento.dto;
+package br.com.alura.orcamento.dto.resumo;
 
 import br.com.alura.orcamento.model.Categoria;
 

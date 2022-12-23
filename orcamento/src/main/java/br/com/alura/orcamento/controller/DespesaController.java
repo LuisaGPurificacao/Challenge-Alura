@@ -7,7 +7,6 @@ import br.com.alura.orcamento.infra.validation.ValidarDespesaIgual;
 import br.com.alura.orcamento.model.Despesa;
 import br.com.alura.orcamento.repository.DespesaRepository;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
