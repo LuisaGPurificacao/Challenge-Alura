@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
@@ -18,5 +19,8 @@ public interface ReceitaRepository extends JpaRepository<Receita, Long> {
 
     @Query(value = "select * from receitas where (YEAR(data) = ? and MONTH(data) = ?)", nativeQuery = true)
     public Page<Receita> findByAnoeMes(String ano, String mes, Pageable paginacao);
+
+    @Query(value = "select sum(valor) from receitas where (MONTH(data) = ? and YEAR(data) = ?)", nativeQuery = true)
+    public BigDecimal valorReceitas(String mes, String ano);
 
 }
